@@ -1,5 +1,7 @@
 package org.lessons.java.shop;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Product {
@@ -7,10 +9,10 @@ public class Product {
     public int code;
     public String name;
     public String bio;
-    public float price;
-    public int iva;
+    public BigDecimal price;
+    public BigDecimal iva;
 
-    public Product(String name, String bio, float price, int iva) {
+    public Product(String name, String bio, BigDecimal price, BigDecimal iva) {
         this.code = r.nextInt(99999);
         this.name = name;
         this.bio = bio;
@@ -18,13 +20,15 @@ public class Product {
         this.iva = iva;
     }
 
-    public void basePrice() {
+    public void getBasePrice() {
         System.out.printf("Il prezzo base è: %.2f%n", this.price);
     }
 
     public void ivaPrice() {
-        float newPrice = this.price * (1 + this.iva / 100f);
-        System.out.printf("Il prezzo comprensivo di iva è: %.2f%n", newPrice);
+        if (price != null && iva != null) {
+            BigDecimal newPrice = price.add(price.multiply(iva)).setScale(2, RoundingMode.DOWN);
+            System.out.println("Il prezzo ivato è: " + newPrice);
+        }
     }
 
     public void extendedName() {
