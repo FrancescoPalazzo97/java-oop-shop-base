@@ -5,19 +5,55 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 public class Product {
-    Random r = new Random();
-    public int code;
-    public String name;
-    public String bio;
-    public BigDecimal price;
-    public BigDecimal iva;
+    private final int code;
+    private String name;
+    private String bio;
+    private BigDecimal price;
+    private BigDecimal iva;
 
+    Random r = new Random();
+
+    // * Costruttore con bio
     public Product(String name, String bio, BigDecimal price, BigDecimal iva) {
         this.code = r.nextInt(99999);
         this.name = name;
         this.bio = bio;
         this.price = price;
         this.iva = iva;
+    }
+
+    // * Costruttore senza bio
+    public Product(String name, BigDecimal price, BigDecimal iva) {
+        this.code = r.nextInt(99999);
+        this.name = name;
+        this.bio = "Nessuna bio";
+        this.price = price;
+        this.iva = iva;
+    }
+
+    // * Metodo per recuperare il codice prodotto
+    public int getCode() {
+        return this.code;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        if (name.trim() != null) {
+            this.name = name;
+        }
+    }
+
+    public String getBio() {
+        return this.bio;
+    }
+
+    public void setBio(String bio) {
+        if (bio.trim() != null) {
+            this.bio = bio;
+        }
     }
 
     public void getBasePrice() {
