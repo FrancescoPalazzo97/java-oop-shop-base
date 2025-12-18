@@ -26,8 +26,11 @@ public class StudentRegister {
 
     public void getStudents() {
         System.out.println("Stampo studenti");
-        for (int i = 0; i < arrayLength; i++) {
-            System.out.println(i + ": " + studentList[i].getStudentInfo());
+        // for (int i = 0; i < arrayLength; i++) {
+        // System.out.println(i + ": " + studentList[i].getStudentInfo());
+        // }
+        for (Student student : this.studentList) { // ! il forEach di Java
+            System.out.println(student.getStudentInfo());
         }
     }
 }
