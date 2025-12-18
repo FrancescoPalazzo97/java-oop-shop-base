@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) {
-        Product smartphone = new Product("OnePlus 15", "Nuovo smartphone di casa OnePlus", new BigDecimal(999.99),
-                new BigDecimal(0.22));
+        Cuffia first = new Cuffia("Sony", null, BigDecimal.valueOf(300), BigDecimal.valueOf(0.22), "black", true);
 
-        System.out.println("Il codice del prodotto è: " + smartphone.getCode());
-        smartphone.getBasePrice();
-        smartphone.ivaPrice();
-        smartphone.extendedName();
+        Cuffia second = new Cuffia("Batton", null, BigDecimal.valueOf(10), BigDecimal.valueOf(0.22), "black", false);
+
+        first.extendedName();
+        first.printIsWireless();
+        second.extendedName();
+        second.printIsWireless();
     }
+
 }

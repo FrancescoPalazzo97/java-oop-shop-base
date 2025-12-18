@@ -5,11 +5,11 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 public class Product {
-    private final int code;
-    private String name;
-    private String bio;
-    private BigDecimal price;
-    private BigDecimal iva;
+    protected final int code;
+    protected String name;
+    protected String bio;
+    protected BigDecimal price;
+    protected BigDecimal iva;
 
     Random r = new Random();
 
@@ -62,7 +62,7 @@ public class Product {
 
     public void ivaPrice() {
         if (price != null && iva != null) {
-            BigDecimal newPrice = price.add(price.multiply(iva)).setScale(2, RoundingMode.DOWN);
+            BigDecimal newPrice = price.subtract(price.multiply(iva)).setScale(2, RoundingMode.DOWN);
             System.out.println("Il prezzo ivato è: " + newPrice);
         }
     }
