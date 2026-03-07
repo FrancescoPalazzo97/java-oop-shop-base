@@ -5,28 +5,28 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 public class Product {
-    protected final int code;
-    protected String name;
-    protected String bio;
-    protected BigDecimal price;
-    protected BigDecimal iva;
+    private int code;
+    private String name;
+    private String bio;
+    private BigDecimal price;
+    private BigDecimal iva;
 
     Random r = new Random();
 
-    // * Costruttore con bio
-    public Product(String name, String bio, BigDecimal price, BigDecimal iva) {
+    // * Costruttore con iva di default
+    public Product(String name, String bio, BigDecimal price) {
         this.code = r.nextInt(99999);
         this.name = name;
         this.bio = bio;
         this.price = price;
-        this.iva = iva;
+        this.iva = new BigDecimal(0.22);
     }
 
-    // * Costruttore senza bio
-    public Product(String name, BigDecimal price, BigDecimal iva) {
+    // * Costruttore senza iva di default
+    public Product(String name, String bio, BigDecimal price, BigDecimal iva) {
         this.code = r.nextInt(99999);
         this.name = name;
-        this.bio = "Nessuna bio";
+        this.bio = bio;
         this.price = price;
         this.iva = iva;
     }
@@ -56,6 +56,10 @@ public class Product {
         }
     }
 
+    public void setBasePrice(BigDecimal newPrice) {
+        this.price = newPrice;
+    }
+
     public void getBasePrice() {
         System.out.printf("Il prezzo base è: %.2f%n", this.price);
     }
@@ -69,5 +73,13 @@ public class Product {
 
     public void extendedName() {
         System.out.println(this.code + "-" + this.name);
+    }
+
+    @Override
+    public String toString() {
+        if (name != null) {
+            return code + "-" + name;
+        }
+        return null;
     }
 }

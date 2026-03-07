@@ -7,20 +7,29 @@ public class Cuffia extends Product {
     protected boolean isWireless;
 
     public Cuffia(String name, String bio, BigDecimal price, BigDecimal iva, String colore, boolean isWireless) {
-        super(name, bio, price, iva);
+        super(name, bio, price);
         this.colore = colore;
         this.isWireless = isWireless;
     }
 
-    public void printColore() {
-        System.out.println("il colore è " + this.colore);
+    public String getColore() {
+        return this.colore;
     }
 
-    public void printIsWireless() {
-        if (!isWireless) {
-            System.out.println("Non è wireless!");
-            return;
-        }
-        System.out.println("È wireless!");
+    public void setColore(String newColore) {
+        this.colore = newColore;
+    }
+
+    public Boolean getWireless() {
+        return this.isWireless;
+    }
+
+    public void setWireless(boolean isWireless) {
+        this.isWireless = isWireless;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nColore: " + getColore() + "\nWireless: " + getWireless();
     }
 }

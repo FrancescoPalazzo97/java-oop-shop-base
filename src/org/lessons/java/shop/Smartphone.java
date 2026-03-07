@@ -7,24 +7,29 @@ public class Smartphone extends Product {
     protected int memoria;
 
     public Smartphone(String name, String bio, BigDecimal price, BigDecimal iva, String IMEI, int memoria) {
-        super(name, price, iva);
+        super(name, bio, price);
         this.IMEI = IMEI;
         this.memoria = memoria;
     }
 
-    public void printImei() {
-        System.out.println("L'IMEI di " + this.name + ": " + this.IMEI);
+    public void setImei(String newImei) {
+        this.IMEI = newImei;
     }
 
-    public void setMemoria(int memoriaOccupata) {
-        if (memoriaOccupata > 0) {
-            this.memoria -= memoriaOccupata;
-        } else {
-            System.out.println("Il valore non può essere negativo!");
-        }
+    public String getImei() {
+        return "IMEI: " + this.IMEI;
     }
 
-    public void printMemoria() {
-        System.out.println("Memoria disponibile: " + this.memoria);
+    public void setMemoria(int newMemoria) {
+        this.memoria = newMemoria;
+    }
+
+    public String getMemoria() {
+        return "Memoria disponibile: " + this.memoria;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\n" + getImei() + "\n" + getMemoria();
     }
 }

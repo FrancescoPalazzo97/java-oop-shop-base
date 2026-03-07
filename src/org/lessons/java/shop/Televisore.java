@@ -12,15 +12,24 @@ public class Televisore extends Product {
         this.isSmart = isSmart;
     }
 
-    public void printDimensione() {
-        System.out.println("La dimensione è: " + this.dimensione);
+    public void setDimensione(int newDimensione) {
+        this.dimensione = newDimensione;
     }
 
-    public void printIsSmart() {
-        if (!isSmart) {
-            System.out.println("Il televisore non è smart!");
-            return;
-        }
-        System.out.println("Il televisore è smart!");
+    public int getDimensione() {
+        return this.dimensione;
+    }
+
+    public void setIsSmart(boolean isSmartTv) {
+        this.isSmart = isSmartTv;
+    }
+
+    public boolean isSmart() {
+        return this.isSmart;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nDimensioni TV: " + getDimensione() + "\nSmart: " + isSmart();
     }
 }
