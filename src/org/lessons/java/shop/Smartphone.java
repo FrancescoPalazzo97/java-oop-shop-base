@@ -6,7 +6,7 @@ public class Smartphone extends Product {
     protected String IMEI;
     protected int memoria;
 
-    public Smartphone(String name, String bio, BigDecimal price, BigDecimal iva, String IMEI, int memoria) {
+    public Smartphone(String name, String bio, BigDecimal price, String IMEI, int memoria) {
         super(name, bio, price);
         this.IMEI = IMEI;
         this.memoria = memoria;
