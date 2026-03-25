@@ -6,7 +6,7 @@ public class Cuffia extends Product {
     protected String colore;
     protected boolean isWireless;
 
-    public Cuffia(String name, String bio, BigDecimal price, BigDecimal iva, String colore, boolean isWireless) {
+    public Cuffia(String name, String bio, BigDecimal price, String colore, boolean isWireless) {
         super(name, bio, price);
         this.colore = colore;
         this.isWireless = isWireless;

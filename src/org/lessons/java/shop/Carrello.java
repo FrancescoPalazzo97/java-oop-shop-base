@@ -4,91 +4,83 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Carrello {
-    private Product[] items;
-    private int cartLength = 0;
 
-    public Carrello() {
-        this.items = new Product[cartLength];
-    }
+    public static void main(String[] args) {
 
-    public String getCart() {
-        String cartString = "Carrello:\n";
-        for (int i = 0; i < items.length; i++) {
-            cartString += items[i].toString();
-        }
-        return cartString;
-    }
+        Product[] products = new Product[3];
+        Scanner input = new Scanner(System.in);
 
-    public void addItem() {
+        for (int i = 0; i < products.length; i++) {
 
-        System.out.println("Cosa vuoi aggiungere? Puoi scegliere tra Smartphone | Cuffia | Televisore");
+            System.out.println("Nome del prodotto: ");
+            String pName = input.nextLine();
 
-        Scanner in = new Scanner(System.in);
-        String selectedProduct = in.nextLine();
+            System.out.println("Marca del prodotto: ");
+            String pBrand = input.nextLine();
 
-        if (selectedProduct.toLowerCase().equals("smartphone")) {
-            System.out.println("Hai selezionato 'Smartphone'");
-            System.out.println("Inserisci nome dello smartphone: ");
+            System.out.println("Prezzo (senza iva): ");
+            int pPrice = Integer.parseInt(input.nextLine());
 
-            String smartphoneName = in.nextLine();
-            String smartphoneBio = "Bio smartphone";
-            BigDecimal smartphonePrice = new BigDecimal(999);
-            String imei = "dasfas";
-            int storage = 1024;
+            System.out.println("A quale categoria fa parte? tv | smartphone | cuffia");
+            String pCategory = input.nextLine();
 
-            Smartphone newSmartphone = new Smartphone(smartphoneName, smartphoneBio, smartphonePrice, imei, storage);
+            switch (pCategory.toLowerCase()) {
+                case "tv":
 
-            cartLength++;
-            Product[] newCart = new Product[cartLength];
-            int i = 0;
-            while (i < 0) {
-                items[i] = newCart[i];
-                i++;
+                    System.out.println("Dimensioni della TV in pollici: ");
+                    int tvSize = Integer.parseInt(input.nextLine());
+
+                    System.out.println("Smart TV? (Inserisci TRUE o FALSE)");
+                    boolean isSmart = Boolean.parseBoolean(input.nextLine());
+
+                    Televisore tv = new Televisore(pName, pCategory, new BigDecimal(pPrice), tvSize, isSmart);
+
+                    products[i] = tv;
+
+                    break;
+
+                case "smartphone":
+
+                    System.out.println("GB di memoria");
+                    int gb = Integer.parseInt(input.nextLine());
+
+                    System.out.println("Codice IMEI: ");
+                    String imei = input.nextLine();
+
+                    Smartphone phone = new Smartphone(pName, pCategory, new BigDecimal(pPrice), imei, gb);
+
+                    products[i] = phone;
+
+                    break;
+                case "cuffia":
+
+                    System.out.println("Colore delle cuffie: ");
+                    String color = input.nextLine();
+
+                    System.out.println("Sono wireless? (Inserisci TRUE o FALSE)");
+                    boolean isWireless = Boolean.parseBoolean(input.nextLine());
+
+                    Cuffia headphone = new Cuffia(pName, pBrand, new BigDecimal(pPrice), color, isWireless);
+
+                    products[i] = headphone;
+
+                    break;
+
+                default:
+                    break;
             }
-            newCart[i] = newSmartphone;
-            this.items = newCart;
-            System.out.println(getCart());
-        } else if (selectedProduct.toLowerCase().equals("cuffia")) {
-            System.out.println("Hai selezionato 'Cuffia'");
-            System.out.println("Inserisci nome della cuffia: ");
 
-            String cuffiaName = in.nextLine();
-            String cuffiaBio = "bio cuffia";
-            BigDecimal price = new BigDecimal(200);
-            BigDecimal iva = new BigDecimal(0.22);
-            String color = "nero";
-            Cuffia newCuffia = new Cuffia(cuffiaName, cuffiaBio, price, iva, color, true);
-            cartLength++;
-            Product[] newCart = new Product[cartLength];
-            int i = 0;
-            while (i < 0) {
-                items[i] = newCart[i];
-                i++;
-            }
-            newCart[i] = newCuffia;
-            this.items = newCart;
-            System.out.println(getCart());
-        } else if (selectedProduct.toLowerCase().equals("televisore")) {
-            System.out.println("Hai selezionato 'Televisore'");
-            System.out.println("Inserisci nome del televisore: ");
-            String tvName = in.nextLine();
-            BigDecimal price = new BigDecimal(200);
-            BigDecimal iva = new BigDecimal(0.22);
-            Televisore newTv = new Televisore(tvName, "bio Tv", price, iva, 100, true);
-            cartLength++;
-            Product[] newCart = new Product[cartLength];
-            int i = 0;
-            while (i < 0) {
-                items[i] = newCart[i];
-                i++;
-            }
-            newCart[i] = newTv;
-            this.items = newCart;
-            System.out.println(getCart());
-        } else {
-            System.out.println("Prodotto inserito non esistente!");
+            System.out.println("--------------------------------");
         }
 
-        in.close();
+        input.close();
+
+        System.out.println("Ecco il tuo carrello");
+
+        for (int i = 0; i < products.length; i++) {
+            System.out.println(products[i]);
+            System.out.println("-----------------");
+        }
     }
+
 }
