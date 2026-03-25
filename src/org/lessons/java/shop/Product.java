@@ -11,27 +11,24 @@ public class Product {
     private BigDecimal price;
     private BigDecimal iva;
 
-    Random r = new Random();
+    private static final Random randomGen = new Random();
 
-    // * Costruttore con iva di default
     public Product(String name, String bio, BigDecimal price) {
-        this.code = r.nextInt(99999);
+        this.code = Product.randomGen.nextInt(99999);
         this.name = name;
         this.bio = bio;
         this.price = price;
         this.iva = new BigDecimal(0.22);
     }
 
-    // * Costruttore senza iva di default
     public Product(String name, String bio, BigDecimal price, BigDecimal iva) {
-        this.code = r.nextInt(99999);
+        this.code = Product.randomGen.nextInt(99999);
         this.name = name;
         this.bio = bio;
         this.price = price;
         this.iva = iva;
     }
 
-    // * Metodo per recuperare il codice prodotto
     public int getCode() {
         return this.code;
     }
@@ -57,22 +54,24 @@ public class Product {
     }
 
     public void setBasePrice(BigDecimal newPrice) {
-        this.price = newPrice;
-    }
-
-    public void getBasePrice() {
-        System.out.printf("Il prezzo base è: %.2f%n", this.price);
-    }
-
-    public void ivaPrice() {
-        if (price != null && iva != null) {
-            BigDecimal newPrice = price.subtract(price.multiply(iva)).setScale(2, RoundingMode.DOWN);
-            System.out.println("Il prezzo ivato è: " + newPrice);
+        if (newPrice.compareTo(BigDecimal.ZERO) > 0) {
+            this.price = newPrice;
         }
     }
 
-    public void extendedName() {
-        System.out.println(this.code + "-" + this.name);
+    public BigDecimal getBasePrice() {
+        return this.price;
+    }
+
+    public BigDecimal getIvaPrice() {
+        if (price != null && iva != null) {
+            return price.add(price.multiply(iva)).setScale(2, RoundingMode.DOWN);
+        }
+        return null;
+    }
+
+    public void applyDiscount() {
+        setBasePrice(this.price.multiply(BigDecimal.ONE.subtract(new BigDecimal(0.2))));
     }
 
     @Override
